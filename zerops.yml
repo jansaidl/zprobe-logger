@@ -1,0 +1,20 @@
+logger:
+  build:
+    # select what technology your build uses
+    base: [ go@1 ]
+
+    # build your application
+    build:
+      - go build -ldflags="-X main.Version=v1" -o main logger/main.go
+      - chmod +x main
+      - go build -o exitCode exitcode/cmd.go
+      - chmod +x exitCode
+      - ./exitCode 0
+
+    # select which files / folders to deploy after the build is finished
+    deploy: [ main ]
+
+
+  run:
+    # start your application (NodeJS, GoLang only)
+    start: ./main
