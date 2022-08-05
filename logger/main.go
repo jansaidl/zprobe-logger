@@ -58,7 +58,7 @@ var workers []*worker
 
 var inc = time.Now().UnixNano()
 
-func getRecordIdFromTimestamp(now time.Time) string {
+func GetRecordIdFromTimestamp(now time.Time) string {
 	return fmt.Sprintf("%013s%013s", strconv.FormatInt(now.UnixNano(), 36), strconv.FormatInt(atomic.AddInt64(&inc, 1), 36))
 }
 
@@ -68,7 +68,7 @@ func call() {
 	now := time.Now()
 
 	mainCounter++
-	fmt.Println(mainCounter, len(workers), getRecordIdFromTimestamp(now), now.Format(time.RFC3339Nano))
+	fmt.Println(mainCounter, len(workers), GetRecordIdFromTimestamp(now), now.Format(time.RFC3339Nano))
 }
 
 func main() {
